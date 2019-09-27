@@ -21,8 +21,10 @@ import static java.lang.Math.abs;
 public abstract class Hardware extends LinearOpMode{
     public static final byte LEFT = 1, CENTER = 2, RIGHT = 3;
 
-    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm;
-    public void init(HardwareMap hardwareMap) {
+    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm /*, upMotor*/;
+
+    public void init(HardwareMap hardwareMap)
+    {
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -42,14 +44,19 @@ public abstract class Hardware extends LinearOpMode{
         mainArm = hardwareMap.dcMotor.get("mainArmMotor");
         mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mainArm.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        /*upMotor = hardwareMap.dcMotor.get("mainUpMotor");
+        upMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        upMotor.setDirection(DcMotorSimple.Direction.FORWARD);*/
     }
-    public void drive(double power){
+    public void drive(float power)
+    {
         backLeftMotor.setPower(-/*0.51**/power);
         backRightMotor.setPower(power);
         frontLeftMotor.setPower(-/*0.51**/power);
         frontRightMotor.setPower(power);
     }
-    public void turn(double power){
+    public void turn(float power){
         power = -power;
         backRightMotor.setPower(power);
         backLeftMotor.setPower(power);
@@ -76,4 +83,12 @@ public abstract class Hardware extends LinearOpMode{
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
     }
+
+    /*public void goUp(float power){
+        upMotor.setPower(-power);
+    }*/
+    //@TODO measure spped of robot once we get wheels
+    //@TODO program autonomous method lol
+    //@TODO once we get mecanum wheels we need left and right
+    //@TODO grabber method/ method that moves up the linear actuator
 }
