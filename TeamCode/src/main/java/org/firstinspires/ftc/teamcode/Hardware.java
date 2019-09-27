@@ -69,4 +69,11 @@ public abstract class Hardware extends LinearOpMode{
     public void raiseArm(float power){
         mainArm.setPower(power);
     }
+
+    public void stopDrivetrain(){
+        backLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+    }
 }
