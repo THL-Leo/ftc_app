@@ -1,0 +1,72 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
+import java.util.Date;
+
+import static java.lang.Math.abs;
+
+public abstract class Hardware extends LinearOpMode{
+    public static final byte LEFT = 1, CENTER = 2, RIGHT = 3;
+
+    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm;
+    public void init(HardwareMap hardwareMap) {
+        backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
+        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        mainArm = hardwareMap.dcMotor.get("mainArmMotor");
+        mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        mainArm.setDirection(DcMotorSimple.Direction.FORWARD);
+    }
+    public void drive(double power){
+        backLeftMotor.setPower(-/*0.51**/power);
+        backRightMotor.setPower(power);
+        frontLeftMotor.setPower(-/*0.51**/power);
+        frontRightMotor.setPower(power);
+    }
+    public void turn(double power){
+        power = -power;
+        backRightMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+    }
+    public void Timer(long milis){
+        long time = new Date().getTime() + milis;
+        while (time > new Date().getTime() && opModeIsActive());
+    }
+    public void strafe(float power){
+        backLeftMotor.setPower(-power);
+        backRightMotor.setPower(-power);
+        frontLeftMotor.setPower(power);
+        frontRightMotor.setPower(power);
+    }
+    public void raiseArm(float power){
+        mainArm.setPower(power);
+    }
+}
