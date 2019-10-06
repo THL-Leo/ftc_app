@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.*;
 
 @TeleOp( name = "Driver Control", group = "Linear Opmode" )
 public class Teleop extends Hardware
@@ -19,7 +19,7 @@ public class Teleop extends Hardware
 
         while (opModeIsActive()) {
             if (gamepad1.left_stick_y > .2 || gamepad1.left_stick_y < -.2)
-                drive(-gamepad1.left_stick_y);
+                drive(gamepad1.left_stick_y);
             else if (gamepad1.right_stick_x > .2 || gamepad1.right_stick_x < -.2)
                 turn(gamepad1.right_stick_x);
             else
@@ -33,6 +33,13 @@ public class Teleop extends Hardware
                 strafe(0f);
             }
 
+            if (gamepad1.right_bumper) {
+                pullUp(1f);
+            } else if (gamepad1.left_bumper){
+                pullUp(-1f);
+            } else {
+                pullUp(0.0f);
+            }
         }
     }
 }
