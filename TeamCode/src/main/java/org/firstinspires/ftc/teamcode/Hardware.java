@@ -69,7 +69,7 @@ Hardware extends LinearOpMode{
         frontLeftMotor.setPower(power);
         frontRightMotor.setPower(power);
     }
-    public void Timer(long milis){
+    public void timer(long milis){
         long time = new Date().getTime() + milis;
         while (time > new Date().getTime() && opModeIsActive());
     }

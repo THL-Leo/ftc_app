@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+// 60 motor = 420 ticks per revolution
+
 import com.qualcomm.robotcore.eventloop.opmode.*;
 
 @TeleOp( name = "Driver Control", group = "Linear Opmode" )
@@ -33,10 +35,10 @@ public class Teleop extends Hardware
                 strafe(0f);
             }
 
-            if (gamepad1.right_bumper) {
-                pullUp(1f);
-            } else if (gamepad1.left_bumper){
-                pullUp(-1f);
+            if (gamepad1.a) {
+                pullUp(0.5f);
+            } else if (gamepad1.y){
+                pullUp(-0.5f);
             } else {
                 pullUp(0.0f);
             }
