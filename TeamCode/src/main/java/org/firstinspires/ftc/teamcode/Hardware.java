@@ -25,6 +25,7 @@ Hardware extends LinearOpMode{
 
     DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor/*, mainArm*/ /*, upMotor*/;
     CRServo pulley;
+    Servo leftClaw, rightClaw;
 
     public void init(HardwareMap hardwareMap)
     {
@@ -47,6 +48,9 @@ Hardware extends LinearOpMode{
 
         pulley = hardwareMap.crservo.get("pulley");
         pulley.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        leftClaw = hardwareMap.servo.get("leftClaw");
+        rightClaw = hardwareMap.servo.get("rightClaw");
 
         /*mainArm = hardwareMap.dcMotor.get("mainArmMotor");
         mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -93,6 +97,11 @@ Hardware extends LinearOpMode{
         backRightMotor.setPower(0);
         frontRightMotor.setPower(0);
         frontLeftMotor.setPower(0);
+    }
+
+    public void clawBois(float power)
+    {
+        leftClaw
     }
 
     /*public void goUp(float power){
