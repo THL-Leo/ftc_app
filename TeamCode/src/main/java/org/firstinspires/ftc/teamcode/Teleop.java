@@ -42,6 +42,14 @@ public class Teleop extends Hardware
             } else {
                 pullUp(0.0f);
             }
+
+            if(gamepad1.right_bumper){
+                clawBois(0.4f);
+            } else if(gamepad1.left_bumper){
+                clawBois(0.6f);
+            } else {
+                clawBois(0f);
+            }
         }
     }
 }
