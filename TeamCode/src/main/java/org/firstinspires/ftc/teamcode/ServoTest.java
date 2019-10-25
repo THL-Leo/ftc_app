@@ -9,13 +9,14 @@ public class ServoTest extends Hardware {
         waitForStart();
         init(hardwareMap);
         while (opModeIsActive()) {
-            telemetry.addData("Main Servo Position", mainClaw.getPosition());
-            telemetry.update();
+//            telemetry.addData("Main Servo Position", mainClaw.getPosition());
+//            telemetry.update();
+//
+//            mainClaw.setPosition(0.8);
+//            timer(3000);
+//            mainClaw.setPosition(0.2);
+//            timer(3000);
 
-            mainClaw.setPosition(0.8);
-            timer(3000);
-            mainClaw.setPosition(0.2);
-            timer(3000);
         }
     }
 }
