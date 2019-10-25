@@ -34,19 +34,23 @@ Hardware extends LinearOpMode {
     public void init(HardwareMap hardwareMap) {
 
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         frontLeftMotor = hardwareMap.dcMotor.get("frontLeftMotor");
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         pulley = hardwareMap.crservo.get("pulley");
