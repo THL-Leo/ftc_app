@@ -26,10 +26,9 @@ Hardware extends LinearOpMode {
     static final double DRIVE_GEAR_REDUCTION = 60;
     static final double WHEEL_DIAMETER = 4;
 
-    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor/*, mainArm*/ /*, upMotor*/;
+    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor;
 
-    CRServo pulley;
-    CRServo mainClaw;
+    CRServo pulley, mainClaw, mainArm;
 
     public void init(HardwareMap hardwareMap) {
 
@@ -59,14 +58,8 @@ Hardware extends LinearOpMode {
         mainClaw = hardwareMap.crservo.get("mainClaw");
         mainClaw.setDirection(DcMotorSimple.Direction.FORWARD);
 
-
-        /*mainArm = hardwareMap.dcMotor.get("mainArmMotor");
-        mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        mainArm.setDirection(DcMotorSimple.Direction.FORWARD);*/
-
-        /*upMotor = hardwareMap.dcMotor.get("mainUpMotor");
-        upMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        upMotor.setDirection(DcMotorSimple.Direction.FORWARD);*/
+        mainArm = hardwareMap.crservo.get("mainArm");
+        mainArm.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
     public void drive(float power) {
@@ -112,6 +105,10 @@ Hardware extends LinearOpMode {
 
     public void clawBois(float power) {
         mainClaw.setPower(power);
+    }
+
+    public void extendArm(float power){
+        mainArm.setPower(power);
     }
 
     public void encoderDrive(double distance) {
