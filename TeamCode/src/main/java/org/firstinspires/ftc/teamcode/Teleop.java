@@ -20,10 +20,11 @@ public class Teleop extends Hardware
         waitForStart();
 
         while (opModeIsActive()) {
-            if (gamepad1.left_stick_y > .2 || gamepad1.left_stick_y < -.2)
-                drive(gamepad1.left_stick_y);
+            if (gamepad1.left_stick_y > .2 || gamepad1.left_stick_y < -.2){
+                drive((gamepad1.left_stick_y > 0.8 ? 0.8f : gamepad1.left_stick_y));
+            }
             else if (gamepad1.right_stick_x > .2 || gamepad1.right_stick_x < -.2)
-                turn(gamepad1.right_stick_x);
+                turn((gamepad1.right_stick_x > 0.8 ? 0.8f : gamepad1.right_stick_x));
             else
                 stopDrivetrain();
 

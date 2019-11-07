@@ -63,19 +63,20 @@ Hardware extends LinearOpMode {
     }
 
     public void drive(float power) {
-        backLeftMotor.setPower(/*0.51**/power);
+        backLeftMotor.setPower(-power);
         backRightMotor.setPower(-power);
-        frontLeftMotor.setPower(-/*0.51**/power);
+        frontLeftMotor.setPower(
+                power);
         frontRightMotor.setPower(power);
     }
 
     public void turn(float power) {
         backRightMotor.setPower(-power);
-        backLeftMotor.setPower(-power);
-        frontLeftMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontLeftMotor.setPower(-power);
         frontRightMotor.setPower(power);
     }
-
+    
     public void timer(long milis) {
         long time = new Date().getTime() + milis;
         while (time > new Date().getTime() && opModeIsActive()) ;
