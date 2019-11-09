@@ -111,7 +111,7 @@ Hardware extends LinearOpMode {
         mainArm.setPower(power);
     }
 
-    public void encoderDrive(double distance) {
+    public void encoderDrive(double distanceLeft, double distanceRight) {
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -120,27 +120,30 @@ Hardware extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         double circumference = 12.5664;
-        final double counts_per_inch = (1680 * 1) / (4 * 3.1415);
+        final double counts_per_inch = (1680 * 1) / (circumference);
 
         backLeftMotor.setTargetPosition(0);
         backRightMotor.setTargetPosition(0);
         frontLeftMotor.setTargetPosition(0);
         frontRightMotor.setTargetPosition(0);
 
-        backLeftMotor.setTargetPosition(backLeftMotor.getCurrentPosition()+(int) (distance * counts_per_inch));
-        backRightMotor.setTargetPosition(backRightMotor.getCurrentPosition() + (int) (distance * counts_per_inch));
-        frontLeftMotor.setTargetPosition(frontLeftMotor.getCurrentPosition() + (int) (distance * counts_per_inch));
-        frontRightMotor.setTargetPosition(frontRightMotor.getCurrentPosition() + (int) (distance * counts_per_inch));
+        backLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch))
+        ;
+        backRightMotor.setTargetPosition( (int) (distanceRight * counts_per_inch));
+        frontLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch));
+        frontRightMotor.setTargetPosition((int) (distanceRight * counts_per_inch));
 
-        backLeftMotor.setPower(0.64);
-        backRightMotor.setPower(0.8);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        backLeftMotor.setPower(-0.8);
+        backRightMotor.setPower(-0.8);
         frontRightMotor.setPower(0.8);
-        frontLeftMotor.setPower(0.64);
+        frontLeftMotor.setPower(-0.8);
 
     }
 }
