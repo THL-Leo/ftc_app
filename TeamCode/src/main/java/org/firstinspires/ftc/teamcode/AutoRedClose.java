@@ -9,14 +9,12 @@ public class AutoRedClose extends Hardware {
         waitForStart();
         init(hardwareMap);
 
-        encoderDrive(17,17);
+        encoderDrive(3,3);
         while(backRightMotor.isBusy() || backLeftMotor.isBusy() || frontLeftMotor.isBusy() || frontRightMotor.isBusy()){
         }
-        turn(0.8f);
-        timer(2000);
-        encoderDrive(45,45);
-        while(backRightMotor.isBusy() || backLeftMotor.isBusy() || frontLeftMotor.isBusy() || frontRightMotor.isBusy()){
-        }
-        
+        strafe(1);
+        timer(9000);
+
+
     }
 }

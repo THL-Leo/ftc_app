@@ -29,9 +29,9 @@ public class Teleop extends Hardware
                 stopDrivetrain();
 
             if (gamepad1.dpad_right) {
-                strafe(.6f);
+                strafe(.8f);
             } else if (gamepad1.dpad_left) {
-                strafe(-.6f);
+                strafe(-.8f);
             } else {
                 strafe(0f);
             }

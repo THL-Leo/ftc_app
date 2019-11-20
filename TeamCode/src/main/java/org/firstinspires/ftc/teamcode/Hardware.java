@@ -26,9 +26,9 @@ Hardware extends LinearOpMode {
     static final double DRIVE_GEAR_REDUCTION = 60;
     static final double WHEEL_DIAMETER = 4;
 
-    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor;
+    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, pulley;
 
-    CRServo pulley, mainClaw, mainArm;
+    CRServo mainClaw, mainArm;
 
     public void init(HardwareMap hardwareMap) {
 
@@ -52,7 +52,8 @@ Hardware extends LinearOpMode {
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        pulley = hardwareMap.crservo.get("pulley");
+        pulley = hardwareMap.dcMotor.get("pulley");
+        pulley.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         pulley.setDirection(DcMotorSimple.Direction.FORWARD);
 
         mainClaw = hardwareMap.crservo.get("mainClaw");
@@ -63,16 +64,16 @@ Hardware extends LinearOpMode {
     }
 
     public void drive(float power) {
-        backLeftMotor.setPower(-power*0.8);
+        backLeftMotor.setPower(-power);
         backRightMotor.setPower(-power);
-        frontLeftMotor.setPower(power*0.8);
+        frontLeftMotor.setPower(power);
         frontRightMotor.setPower(power);
     }
 
     public void turn(float power) {
         backRightMotor.setPower(power);
-        backLeftMotor.setPower(-power*0.8);
-        frontLeftMotor.setPower(power*0.8);
+        backLeftMotor.setPower(-power);
+        frontLeftMotor.setPower(power);
         frontRightMotor.setPower(-power);
     }
 
@@ -82,8 +83,8 @@ Hardware extends LinearOpMode {
     }
 
     public void strafe(float power) {
-        backLeftMotor.setPower(power);
-        backRightMotor.setPower(power);
+        backLeftMotor.setPower(-power);
+        backRightMotor.setPower(-power);
         frontLeftMotor.setPower(-power);
         frontRightMotor.setPower(-power);
     }
@@ -124,13 +125,12 @@ Hardware extends LinearOpMode {
         double circumference = 12.5664;
         final double counts_per_inch = (1680 * 1) / (circumference);
 
-        backLeftMotor.setTargetPosition(0);
-        backRightMotor.setTargetPosition(0);
-        frontLeftMotor.setTargetPosition(0);
-        frontRightMotor.setTargetPosition(0);
+//        backLeftMotor.setTargetPosition(0);
+//        backRightMotor.setTargetPosition(0);
+//        frontLeftMotor.setTargetPosition(0);
+//        frontRightMotor.setTargetPosition(0);
 
-        backLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch))
-        ;
+        backLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch));
         backRightMotor.setTargetPosition( (int) (distanceRight * counts_per_inch));
         frontLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch));
         frontRightMotor.setTargetPosition((int) (distanceRight * counts_per_inch));
@@ -140,10 +140,10 @@ Hardware extends LinearOpMode {
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        backLeftMotor.setPower(-0.8);
-        backRightMotor.setPower(-0.8);
-        frontRightMotor.setPower(0.8);
-        frontLeftMotor.setPower(-0.8);
+        backLeftMotor.setPower(-1);
+        backRightMotor.setPower(-1);
+        frontLeftMotor.setPower(1);
+        frontRightMotor.setPower(1);
 
     }
 }
