@@ -65,20 +65,20 @@ Hardware extends LinearOpMode {
 
     public void drive(float power) {
         backLeftMotor.setPower(-power);
-        backRightMotor.setPower(-power);
-        frontLeftMotor.setPower(power);
-        frontRightMotor.setPower(power);
-    }
-
-    public void turn(float power) {
         backRightMotor.setPower(power);
-        backLeftMotor.setPower(-power);
         frontLeftMotor.setPower(power);
         frontRightMotor.setPower(-power);
     }
 
-    public void timer(long milis) {
-        long time = new Date().getTime() + milis;
+    public void turn(float power) {
+        backRightMotor.setPower(power);
+        backLeftMotor.setPower(power);
+        frontLeftMotor.setPower(-power);
+        frontRightMotor.setPower(-power);
+    }
+
+    public void timer(double milis) {
+        double time = new Date().getTime() + milis;
         while (time > new Date().getTime() && opModeIsActive()) ;
     }
 
@@ -113,37 +113,45 @@ Hardware extends LinearOpMode {
     }
 
     public void encoderDrive(double distanceLeft, double distanceRight) {
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        double circumference = 12.5664;
-        final double counts_per_inch = (1680 * 1) / (circumference);
+            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+            backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            double circumference = 12.5664;
+            final double counts_per_inch = (1680 * 1) / (circumference);
 
 //        backLeftMotor.setTargetPosition(0);
 //        backRightMotor.setTargetPosition(0);
 //        frontLeftMotor.setTargetPosition(0);
 //        frontRightMotor.setTargetPosition(0);
 
-        backLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch));
-        backRightMotor.setTargetPosition( (int) (distanceRight * counts_per_inch));
-        frontLeftMotor.setTargetPosition((int) (distanceLeft * counts_per_inch));
-        frontRightMotor.setTargetPosition((int) (distanceRight * counts_per_inch));
+            backLeftMotor.setTargetPosition((int) ((distanceLeft-0.5) * counts_per_inch));
+            backRightMotor.setTargetPosition(-(int) (distanceRight * counts_per_inch));
+            frontLeftMotor.setTargetPosition(-(int) ((distanceLeft-0.5) * counts_per_inch));
+            frontRightMotor.setTargetPosition((int) (distanceRight * counts_per_inch));
 
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        backLeftMotor.setPower(-1);
-        backRightMotor.setPower(-1);
-        frontLeftMotor.setPower(1);
-        frontRightMotor.setPower(1);
+            backLeftMotor.setPower(-1);
+            backRightMotor.setPower(1);
+            frontLeftMotor.setPower(1);
+            frontRightMotor.setPower(-1);
 
+
+
+//            backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//            frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }

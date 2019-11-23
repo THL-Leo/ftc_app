@@ -15,9 +15,15 @@ public class EncoderTest extends Hardware {
 //        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 //        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        encoderDrive(17, 17);
-        while(backRightMotor.isBusy() && backLeftMotor.isBusy() && frontLeftMotor.isBusy() && frontRightMotor.isBusy()){
-        }
+//        encoderDrive(17, 17);
+//        while(backLeftMotor.isBusy() && frontRightMotor.isBusy() && backRightMotor.isBusy() && frontLeftMotor.isBusy()){
+//        }
+//        idle();
+
+        drive(-1);
+        timer(1000);
+        drive(0);
+
 
     }
 }

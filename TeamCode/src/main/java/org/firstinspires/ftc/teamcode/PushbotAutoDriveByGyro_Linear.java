@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 @Autonomous(name="Pushbot: Auto Drive By Gyro")
-@Disabled
+
 public class PushbotAutoDriveByGyro_Linear extends Hardware {
 
     /* Declare OpMode members. */
