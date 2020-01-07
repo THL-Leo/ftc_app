@@ -11,7 +11,6 @@ public class Teleop extends Hardware
     //This op mode is the "driving" op mode in which people control the robot with controllers
     /*
     Controls:
-       TODO: Write in all of the new controls
     */
     boolean lowered = false, pressed = false;
     @Override
@@ -36,22 +35,6 @@ public class Teleop extends Hardware
                 strafe(0f);
             }
 
-            if (gamepad1.a) {
-                pullUp(0.5f);
-            } else if (gamepad1.y){
-                pullUp(-0.5f);
-            } else {
-                pullUp(0.0f);
-            }
-
-            if(gamepad1.right_trigger > 0.2){
-                clawBois(0.6f);
-            } else if(gamepad1.left_trigger > 0.2){
-                clawBois(-0.6f);
-            } else {
-                clawBois(0f);
-            }
-
             if(gamepad1.right_bumper){
                 extendArm(0.6f);
             } else if(gamepad1.left_bumper){
@@ -59,6 +42,28 @@ public class Teleop extends Hardware
             } else{
                 extendArm(0f);
             }
+
+            if(gamepad1.right_trigger > 0 && gamepad1.right_trigger < 1.1){
+                moveClaw(0.6);
+            }
+            else if(gamepad1.left_trigger > 0 && gamepad1.left_trigger < 1.1){
+                moveClaw(-0.6);
+            }
+            else
+                moveClaw(0);
+
+            if(gamepad1.b){
+                dragL.setPosition(.4);
+                dragR.setPosition(.61);
+            } else if(gamepad1.x){
+                dragL.setPosition(.6);
+                dragR.setPosition(.39);
+            }
+            else{
+                dragR.setPosition(.5);
+                dragL.setPosition(.5);
+            }
+
         }
     }
 }

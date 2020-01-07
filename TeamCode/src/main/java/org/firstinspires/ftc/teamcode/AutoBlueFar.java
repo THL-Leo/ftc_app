@@ -9,7 +9,12 @@ public class AutoBlueFar extends Hardware {
         waitForStart();
         init(hardwareMap);
 
-        strafe(0.8f);
-        timer(750);
+
+        double circumference = 12.56;
+
+        //1 second = 2 circumference;
+        //time to travel = inches / 2 circumference;
+
+
     }
 }

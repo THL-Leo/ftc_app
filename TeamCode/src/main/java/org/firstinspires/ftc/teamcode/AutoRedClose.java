@@ -9,15 +9,18 @@ public class AutoRedClose extends Hardware {
         waitForStart();
         init(hardwareMap);
 
+        timer(200000);
+        strafe(-0.8f);
+        timer(750);
 //        encoderDrive(3,3);
 //        while(backRightMotor.isBusy() || backLeftMotor.isBusy() || frontLeftMotor.isBusy() || frontRightMotor.isBusy()){
 //        }
 //        strafe(1);
 //        timer(9000);
 
-        double circumference = 12.56;
-        strafe(.8f);
-        timer(24/ circumference * 1000);
+//        double circumference = 12.56;
+//        strafe(.8f);
+//        timer(24/ circumference * 1000);
         //1 second = 2 circumference;
         //time to travel = inches / 2 circumference;
 
