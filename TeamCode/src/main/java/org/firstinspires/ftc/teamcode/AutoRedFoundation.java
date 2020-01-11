@@ -1,16 +1,12 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "BlueFar")
-public class AutoBlueFar extends Hardware {
-
+@Autonomous(name = "RedFoundation")
+public class AutoRedFoundation extends Hardware {
+    @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();
         init(hardwareMap);
-
-
-        double circumference = 12.56;
 
         //1 second = 2 circumference;
         //time to travel = inches / 2 circumference;
@@ -18,7 +14,7 @@ public class AutoBlueFar extends Hardware {
         drive(-1); //forward
         timer(1000);
         sleep(500);
-        turn(.8); //left turn
+        turn(-.8); //left turn
         timer(1000);
         sleep(500);
         drive(1); //backup
@@ -36,7 +32,7 @@ public class AutoBlueFar extends Hardware {
             dragR.setPosition(.39);
         }timer(1200);
         sleep(500);
-        strafe(.8); //strafe left
+        strafe(-.8); //strafe right
         timer(1000);
     }
 }

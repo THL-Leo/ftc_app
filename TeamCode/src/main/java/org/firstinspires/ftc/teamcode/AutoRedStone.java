@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-@Autonomous(name = "RedClose")
+@Autonomous(name = "RedStone")
 
-public class AutoRedClose extends Hardware {
+public class AutoRedStone extends Hardware {
     @Override
     public void runOpMode() throws InterruptedException {
         waitForStart();

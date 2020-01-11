@@ -29,7 +29,7 @@ Hardware extends LinearOpMode {
     static final double WHEEL_DIAMETER = 4;
 
 
-    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm;
+    DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm, pulleyLeft, pulleyRight;
     ModernRoboticsI2cGyro gyro;
     Servo dragL, dragR;
     CRServo claw;
@@ -59,6 +59,14 @@ Hardware extends LinearOpMode {
         mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mainArm.setDirection(DcMotorSimple.Direction.FORWARD);
 
+//        pulleyLeft = hardwareMap.dcMotor.get("pulleyLeft");
+//        pulleyLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        pulleyLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+//
+//        pulleyRight = hardwareMap.dcMotor.get("pulleyRight");
+//        pulleyRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        pulleyRight.setDirection(DcMotorSimple.Direction.FORWARD);
+
         claw = hardwareMap.crservo.get("claw");
         claw.setDirection(CRServo.Direction.FORWARD);
 
@@ -83,20 +91,6 @@ Hardware extends LinearOpMode {
         backLeftMotor.setPower(-power);
         frontLeftMotor.setPower(-power);
         frontRightMotor.setPower(power);
-    }
-
-    public void turnLeft(double power){
-        backRightMotor.setPower(-power);
-        backLeftMotor.setPower(0);
-        frontLeftMotor.setPower(0);
-        frontRightMotor.setPower(-power);
-    }
-
-    public void turnRight(double power){
-        backRightMotor.setPower(0);
-        backLeftMotor.setPower(power);
-        frontLeftMotor.setPower(power);
-        frontRightMotor.setPower(0);
     }
 
     public void timer(double milis) {
@@ -193,7 +187,7 @@ Hardware extends LinearOpMode {
         claw.setPower(power);
     }
 
-
+}
 //    public void encoderDrive(double distanceLeft, double distanceRight) {
 //
 //            backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -236,4 +230,3 @@ Hardware extends LinearOpMode {
 ////            frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 ////            frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //    }
-}
