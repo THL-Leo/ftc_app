@@ -39,12 +39,13 @@ Hardware extends LinearOpMode {
         gyro =  hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
 
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         backLeftMotor = hardwareMap.dcMotor.get("backLeftMotor");
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         frontRightMotor = hardwareMap.dcMotor.get("frontRightMotor");
         frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -122,9 +123,59 @@ Hardware extends LinearOpMode {
         double leftSpeed;
         double rightSpeed;
 
-        double target;
+        double target = gyro.getIntegratedZValue();
+        double startPosition = backLeftMotor.getCurrentPosition();
+
+        while(backLeftMotor.getCurrentPosition() < duration + startPosition){
+            int zAccu = gyro.getIntegratedZValue();
+
+            leftSpeed = power + (zAccu - target)/100;
+            rightSpeed = power - (zAccu - target)/100;
+
+            leftSpeed = Range.clip(leftSpeed, -1, 1);
+            rightSpeed = Range.clip(rightSpeed, -1, 1);
+
+            backLeftMotor.setPower(leftSpeed);
+            frontLeftMotor.setPower(leftSpeed);
+            backRightMotor.setPower(rightSpeed);
+            frontRightMotor.setPower(rightSpeed);
+
+            telemetry.addData("1. Left", backLeftMotor.getPower());
+            telemetry.addData("2. Right", backRightMotor.getPower());
+            telemetry.addData("3. Distance to go", duration + startPosition - backLeftMotor.getCurrentPosition());
+            waitOneFullHardwareCycle();
+        }
+        drive(0);
+        waitOneFullHardwareCycle();
     }
 
+    public void gyroTurn(int target) throws InterruptedException{
+        int zAccu = gyro.getIntegratedZValue();
+
+        while(Math.abs(zAccu - target) > 3){
+            if(zAccu > 0){
+                backLeftMotor.setPower(0.2);
+                frontLeftMotor.setPower(0.2);
+                backRightMotor.setPower(-.2);
+                frontRightMotor.setPower(-.2);
+            }
+
+            if(zAccu < 0){
+                backLeftMotor.setPower(-0.2);
+                frontLeftMotor.setPower(-0.2);
+                backRightMotor.setPower(0.2);
+                frontRightMotor.setPower(0.2);
+            }
+
+            waitOneFullHardwareCycle();
+
+            zAccu = gyro.getIntegratedZValue();
+            telemetry.addData("1. accu", String.format("%03d", zAccu));
+        }
+        drive(0);
+        telemetry.addData("1. accu", String.format("%03d", zAccu));
+        waitOneFullHardwareCycle();
+    }
 
 
     public void stopDrivetrain() {
