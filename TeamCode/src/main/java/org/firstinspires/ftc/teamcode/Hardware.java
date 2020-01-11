@@ -59,13 +59,13 @@ Hardware extends LinearOpMode {
         mainArm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         mainArm.setDirection(DcMotorSimple.Direction.FORWARD);
 
-//        pulleyLeft = hardwareMap.dcMotor.get("pulleyLeft");
-//        pulleyLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        pulleyLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-//
-//        pulleyRight = hardwareMap.dcMotor.get("pulleyRight");
-//        pulleyRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        pulleyRight.setDirection(DcMotorSimple.Direction.FORWARD);
+        pulleyLeft = hardwareMap.dcMotor.get("pulleyLeft");
+        pulleyLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pulleyLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+
+        pulleyRight = hardwareMap.dcMotor.get("pulleyRight");
+        pulleyRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pulleyRight.setDirection(DcMotorSimple.Direction.FORWARD);
 
         claw = hardwareMap.crservo.get("claw");
         claw.setDirection(CRServo.Direction.FORWARD);
@@ -108,10 +108,11 @@ Hardware extends LinearOpMode {
         mainArm.setPower(power);
     }*/
 
-//    public void pullUp(float power) {
-//        pulley.setPower(power);
-//
-//    }
+    public void pullUp(double power) {
+        pulleyLeft.setPower(-power);
+        pulleyRight.setPower(power);
+
+    }
 
     public void driveStraight(int duration, double power) throws InterruptedException{
         double leftSpeed;

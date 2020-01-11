@@ -23,16 +23,16 @@ public class Teleop extends Hardware
                 drive((gamepad1.left_stick_y > 0.8 ? 0.8 : gamepad1.left_stick_y));
             }
             else if (gamepad1.right_stick_x > .2)
-                turn(0.8);
-            else if(gamepad1.right_stick_x < -.2)
                 turn(-0.8);
+            else if(gamepad1.right_stick_x < -.2)
+                turn(0.8);
             else
                 stopDrivetrain();
 
             if (gamepad1.dpad_right) {
-                strafe(.8);
-            } else if (gamepad1.dpad_left) {
                 strafe(-.8);
+            } else if (gamepad1.dpad_left) {
+                strafe(.8);
             } else {
                 strafe(0);
             }
@@ -65,6 +65,13 @@ public class Teleop extends Hardware
                 dragR.setPosition(.5);
                 dragL.setPosition(.5);
             }
+
+            if(gamepad1.y){
+                pullUp(-.8);
+            } else if(gamepad1.x){
+                pullUp(.6);
+            } else
+                pullUp(0);
 
         }
     }

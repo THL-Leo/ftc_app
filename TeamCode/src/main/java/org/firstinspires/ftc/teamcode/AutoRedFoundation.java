@@ -14,25 +14,28 @@ public class AutoRedFoundation extends Hardware {
         drive(-1); //forward
         timer(1000);
         sleep(500);
-        turn(-.8); //left turn
-        timer(1000);
+        turn(-.8); //right turn
+        timer(400);
         sleep(500);
         drive(1); //backup
-        timer(700);
-        {
-            dragL.setPosition(.4);
-            dragR.setPosition(.61);
-        }timer(1200);
+        timer(800);
+        sleep(2000);
+        dragL.setPosition(.4);
+        timer(750);
+        dragR.setPosition(.61);
+        timer(750);
         sleep(500);
         drive(-1); //go forward after hooking onto the foundation
-        timer(1300);
-        sleep(500);
-        {
-            dragL.setPosition(.6);
-            dragR.setPosition(.39);
-        }timer(1200);
-        sleep(500);
-        strafe(-.8); //strafe right
         timer(1000);
+        sleep(500);
+        dragL.setPosition(.6);
+        timer(750);
+        dragR.setPosition(.39);
+        timer(750);
+        sleep(500);
+        turn(.8); //left turn
+        timer(1000);
+        drive(1);
+        timer(2000);
     }
 }
