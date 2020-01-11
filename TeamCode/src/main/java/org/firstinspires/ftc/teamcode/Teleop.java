@@ -20,27 +20,29 @@ public class Teleop extends Hardware
 
         while (opModeIsActive()) {
             if (gamepad1.left_stick_y > .2 || gamepad1.left_stick_y < -.2){
-                drive((gamepad1.left_stick_y > 0.8 ? 0.8f : gamepad1.left_stick_y));
+                drive((gamepad1.left_stick_y > 0.8 ? 0.8 : gamepad1.left_stick_y));
             }
-            else if (gamepad1.right_stick_x > .2 || gamepad1.right_stick_x < -.2)
-                turn((gamepad1.right_stick_x > 0.8 ? 0.8f : gamepad1.right_stick_x));
+            else if (gamepad1.right_stick_x > .2)
+                turn(0.8);
+            else if(gamepad1.right_stick_x < -.2)
+                turn(-0.8);
             else
                 stopDrivetrain();
 
             if (gamepad1.dpad_right) {
-                strafe(.8f);
+                strafe(.8);
             } else if (gamepad1.dpad_left) {
-                strafe(-.8f);
+                strafe(-.8);
             } else {
-                strafe(0f);
+                strafe(0);
             }
 
             if(gamepad1.right_bumper){
-                extendArm(0.6f);
+                extendArm(0.6);
             } else if(gamepad1.left_bumper){
-                extendArm(-0.6f);
+                extendArm(-0.6);
             } else{
-                extendArm(0f);
+                extendArm(0);
             }
 
             if(gamepad1.right_trigger > 0 && gamepad1.right_trigger < 1.1){

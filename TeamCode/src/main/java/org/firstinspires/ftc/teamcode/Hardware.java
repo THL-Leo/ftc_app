@@ -28,14 +28,15 @@ Hardware extends LinearOpMode {
     static final double DRIVE_GEAR_REDUCTION = 60;
     static final double WHEEL_DIAMETER = 4;
 
+
     DcMotor backRightMotor, backLeftMotor, frontRightMotor, frontLeftMotor, mainArm;
-//    ModernRoboticsI2cGyro gyro;
+    ModernRoboticsI2cGyro gyro;
     Servo dragL, dragR;
     CRServo claw;
 
     public void init(HardwareMap hardwareMap) {
 
-//        gyro =  hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
+        gyro =  hardwareMap.get(ModernRoboticsI2cGyro.class, "gyro");
 
         backRightMotor = hardwareMap.dcMotor.get("backRightMotor");
         backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -83,6 +84,20 @@ Hardware extends LinearOpMode {
         frontRightMotor.setPower(power);
     }
 
+    public void turnLeft(double power){
+        backRightMotor.setPower(-power);
+        backLeftMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(-power);
+    }
+
+    public void turnRight(double power){
+        backRightMotor.setPower(0);
+        backLeftMotor.setPower(power);
+        frontLeftMotor.setPower(power);
+        frontRightMotor.setPower(0);
+    }
+
     public void timer(double milis) {
         double time = new Date().getTime() + milis;
         while (time > new Date().getTime() && opModeIsActive()) ;
@@ -102,6 +117,15 @@ Hardware extends LinearOpMode {
 //        pulley.setPower(power);
 //
 //    }
+
+    public void driveStraight(int duration, double power) throws InterruptedException{
+        double leftSpeed;
+        double rightSpeed;
+
+        double target;
+    }
+
+
 
     public void stopDrivetrain() {
         backLeftMotor.setPower(0);
