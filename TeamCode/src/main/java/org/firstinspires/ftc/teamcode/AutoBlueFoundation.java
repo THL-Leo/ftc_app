@@ -43,7 +43,7 @@ public class AutoBlueFoundation extends Hardware {
         turn(.8); //turn left
         timer(1000);
         drive(-1);
-        timer(2000);
+        timer(2500);
 //        sleep(20000);
 //        strafe(-.8);
 //        timer(1000);
