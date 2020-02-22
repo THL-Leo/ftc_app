@@ -20,36 +20,34 @@ public class Teleop extends Hardware
 
         while (opModeIsActive()) {
             if (gamepad1.left_stick_y > .2 || gamepad1.left_stick_y < -.2){
-                drive((gamepad1.left_stick_y > 0.8 ? 0.8 : gamepad1.left_stick_y));
+                drive(gamepad1.left_stick_y > 0.8 ? 0.8 : gamepad1.left_stick_y);
             }
-            else if (gamepad1.right_stick_x > .2)
-                turn(-0.8);
-            else if(gamepad1.right_stick_x < -.2)
-                turn(0.8);
+            else if (gamepad1.right_stick_x > .2 || gamepad1.right_stick_x < -.2)
+                turn(gamepad1.right_stick_x > 0.8 ? 0.8 : gamepad1.right_stick_x);
             else
                 stopDrivetrain();
 
             if (gamepad1.dpad_right) {
-                strafe(-.8);
+                strafe(-1);
             } else if (gamepad1.dpad_left) {
-                strafe(.8);
+                strafe(1);
             } else {
                 strafe(0);
             }
 
-            if(gamepad1.right_bumper){
+            if(gamepad1.left_bumper){
                 extendArm(0.6);
-            } else if(gamepad1.left_bumper){
+            } else if(gamepad1.right_bumper){
                 extendArm(-0.6);
             } else{
                 extendArm(0);
             }
 
             if(gamepad1.right_trigger > 0 && gamepad1.right_trigger < 1.1){
-                moveClaw(0.6);
+                moveClaw(0.8); //out
             }
             else if(gamepad1.left_trigger > 0 && gamepad1.left_trigger < 1.1){
-                moveClaw(-0.6);
+                moveClaw(-0.8); //in
             }
             else
                 moveClaw(0);
@@ -66,13 +64,17 @@ public class Teleop extends Hardware
                 dragL.setPosition(.5);
             }
 
-            if(gamepad1.y){
+            if(gamepad1.dpad_up){
                 pullUp(-.8);
-            } else if(gamepad1.x){
-                pullUp(.6);
+            } else if(gamepad1.dpad_down){
+                pullUp(.3);
             } else
                 pullUp(0);
 
+            if(gamepad1.a){
+                colorSensor2.setPower(1);
+            } else
+                colorSensor2.setPower(0);
         }
     }
 }
